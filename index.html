@@ -11,26 +11,29 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway%7CRighteous" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/css/style.css">
-	<title>Quiz Game</title>
-	<link rel="stylesheet" href="style.css">
-</head>
-<body>
-	<div class="container">
-		<header>
-			<h1>Quiz Game</h1>
-		</header>
-		<main>
+	<title>History Facts Quizz Game</title>
+
+	<head>
+		<body>
+			<h1>Quiz on History Facts</h1>
 			<div class="quiz-container">
-				<div id="quiz"></div>
-				<button id="submit">Submit</button>
+			  <div id="quiz"></div>
 			</div>
-			<div class="score-container">
-				<h2>Score</h2>
-				<div id="score"></div>
-				<button id="restart">Restart</button>
-			</div>
-		</main>
-	</div>
-	<script src="script.js"></script>
-</body>
-</html>
+			<button id="previous">Previous Question</button>
+			<button id="next">Next Question</button>
+			<button id="submit">Submit Quiz</button>
+			<div id="results"></div>
+			<button id="reset-btn" onclick="resetQuiz()">Reset Quiz</button>
+
+
+
+		<footer>
+		  <p>&copy; 2023 Bajdiu Mihaela</p>
+		</footer>
+
+
+
+		<script src="assets/js/script.js"></script>
+	</body>
+	</head>
+	</html>
