@@ -1,3 +1,4 @@
+// Create the Quiz questions
 (function() {
 	const myQuestions = [
 	  {
@@ -102,18 +103,15 @@
 	  },
 	];
   
+	// Store the HTML output for each question and the list of answer choices and for each available answer
 	function buildQuiz() {
-	  // we'll need a place to store the HTML output
-	  const output = [];
-  
-	  // for each question...
-	  myQuestions.forEach((currentQuestion, questionNumber) => {
-		// we'll want to store the list of answer choices
-		const answers = [];
-  
-		// and for each available answer...
-		for (letter in currentQuestion.answers) {
-		  // ...add an HTML radio button
+	  	  const output = [];
+  	  	  myQuestions.forEach((currentQuestion, questionNumber) => {
+
+				const answers = [];
+  				for (letter in currentQuestion.answers) {
+
+		  // Add an HTML radio button
 		  answers.push(
 			`<label>
 			   <input type="radio" name="question${questionNumber}" value="${letter}">
@@ -123,7 +121,7 @@
 		  );
 		}
   
-		// add this question and its answers to the output
+		// Add the question and the answers to the output
 		output.push(
 		  `<div class="slide">
 			 <div class="question"> ${currentQuestion.question} </div>
@@ -132,42 +130,37 @@
 		);
 	  });
   
-	  // finally combine our output list into one string of HTML and put it on the page
+	  // Combine the output list into one string of HTML and place it on the page
 	  quizContainer.innerHTML = output.join("");
 	}
   
+	// Collect answer containers from our quiz
 	function showResults() {
-	  // gather answer containers from our quiz
-	  const answerContainers = quizContainer.querySelectorAll(".answers");
+	  	  const answerContainers = quizContainer.querySelectorAll(".answers");
   
-	  // keep track of user's answers
+	  // Keep the track of user's answers for each question
 	  let numCorrect = 0;
   
-	  // for each question...
-	  myQuestions.forEach((currentQuestion, questionNumber) => {
-		// find selected answer
-		const answerContainer = answerContainers[questionNumber];
+	  	  myQuestions.forEach((currentQuestion, questionNumber) => {
+			const answerContainer = answerContainers[questionNumber];
 		const selector = `input[name=question${questionNumber}]:checked`;
 		const userAnswer = (answerContainer.querySelector(selector) || {}).value;
   
-		// if answer is correct
+		// if answer is correct color green and add to the number of correct answers
 		if (userAnswer === currentQuestion.correctAnswer) {
-		  // add to the number of correct answers
-		  numCorrect++;
+		 		  numCorrect++;
   
-		  // color the answers green
-		  answerContainers[questionNumber].style.color = "lightgreen";
+		  		  answerContainers[questionNumber].style.color = "green";
 		} else {
-		  // if answer is wrong or blank
-		  // color the answers red
+		  // if answer is wrong or blank color red add to the number of incorrect answers
+		 
 		  answerContainers[questionNumber].style.color = "red";
 		}
 	  });
-  
-	  // show number of correct answers out of total
-	  resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
+  	  	  resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
 	}
   
+	// Create the slideshow
 	function showSlide(n) {
 	  slides[currentSlide].classList.remove("active-slide");
 	  slides[n].classList.add("active-slide");
@@ -200,7 +193,7 @@
 	const resultsContainer = document.getElementById("results");
 	const submitButton = document.getElementById("submit");
   
-	// display quiz right away
+	// Display quiz right away
 	buildQuiz();
   
 	const previousButton = document.getElementById("previous");
@@ -210,27 +203,16 @@
   
 	showSlide(0);
   
-	// on submit, show results
+	// On submit button, show results
 	submitButton.addEventListener("click", showResults);
 	previousButton.addEventListener("click", showPreviousSlide);
 	nextButton.addEventListener("click", showNextSlide);
 
-	function resetQuiz() {
-		// reset the score to 0
-		score = 0;
 		
-		// reset the question index to 0
-		currentQuestion = 0;
-		
-		// shuffle the questions
-		questions.sort(function() { return 0.5 - Math.random() });
-		
-		// reset the choices and feedback
-		choices = [];
-		feedback = [];
-		
-		// display the first question
-		displayQuestion();
-	  }
 	  
   })();
+
+  // Reset button
+  document.querySelector('.restart-btn').addEventListener('click', function(){
+	window.location.reload();
+	return false;});
